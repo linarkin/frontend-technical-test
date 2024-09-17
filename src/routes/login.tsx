@@ -7,12 +7,12 @@ import {
   Input,
   Button,
   FormErrorMessage,
-} from "@chakra-ui/react";
-import { useMutation } from "@tanstack/react-query";
-import { createFileRoute, Navigate } from "@tanstack/react-router";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { login, UnauthorizedError } from "../api";
-import { useAuthentication } from "../contexts/authentication";
+} from '@chakra-ui/react';
+import { useMutation } from '@tanstack/react-query';
+import { createFileRoute, Navigate } from '@tanstack/react-router';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { login, UnauthorizedError } from '../api';
+import { useAuthentication } from '../contexts/authentication';
 
 type SearchParams = {
   redirect?: string;
@@ -41,7 +41,7 @@ export const LoginPage: React.FC = () => {
     mutationFn: (data: Inputs) => login(data.username, data.password),
     onSuccess: ({ jwt }) => {
       authenticate(jwt);
-    }
+    },
   });
   const { register, handleSubmit } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
@@ -81,7 +81,7 @@ export const LoginPage: React.FC = () => {
               placeholder="Enter your username"
               bg="white"
               size="sm"
-              {...register("username")}
+              {...register('username')}
             />
           </FormControl>
           <FormControl isInvalid={error !== null}>
@@ -91,7 +91,7 @@ export const LoginPage: React.FC = () => {
               placeholder="Enter your password"
               bg="white"
               size="sm"
-              {...register("password")}
+              {...register('password')}
             />
             {error !== null && renderError(error)}
           </FormControl>
@@ -112,11 +112,12 @@ export const LoginPage: React.FC = () => {
   );
 };
 
-export const Route = createFileRoute("/login")({
+export const Route = createFileRoute('/login')({
   validateSearch: (search): SearchParams => {
     return {
-      redirect: typeof search.redirect === "string" ? search.redirect : undefined,
-    }
+      redirect:
+        typeof search.redirect === 'string' ? search.redirect : undefined,
+    };
   },
   component: LoginPage,
 });

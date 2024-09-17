@@ -5,18 +5,19 @@ import {
   Icon,
   HStack,
   StackDivider,
-} from "@chakra-ui/react";
+  Text,
+} from '@chakra-ui/react';
 import {
   createRootRouteWithContext,
   Link,
   Outlet,
-} from "@tanstack/react-router";
+} from '@tanstack/react-router';
 import {
   AuthenticationState,
   useAuthentication,
-} from "../contexts/authentication";
-import { UserDropdown } from "../components/user-dropdown";
-import { Plus } from "@phosphor-icons/react";
+} from '../contexts/authentication';
+import { UserDropdown } from '../components/user-dropdown';
+import { Plus } from '@phosphor-icons/react';
 
 type RouterContext = {
   authState: AuthenticationState;
@@ -36,7 +37,9 @@ export const Route = createRootRouteWithContext<RouterContext>()({
         >
           {/* Title */}
           <Heading size="lg" color="white">
-            MemeFactory
+            <Text as={Link} to="/">
+              MemeFactory
+            </Text>
           </Heading>
           {state.isAuthenticated && (
             <HStack

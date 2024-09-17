@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from "react";
+import React, { PropsWithChildren } from 'react';
 import {
   ListenerFn,
   Outlet,
@@ -8,17 +8,20 @@ import {
   createRootRoute,
   createRoute,
   createRouter,
-} from "@tanstack/react-router";
-import { render } from "@testing-library/react";
+} from '@tanstack/react-router';
+import { render } from '@testing-library/react';
 
-function createTestRouter(component: (...args: any) => React.ReactNode, currentUrl: string) {
+function createTestRouter(
+  component: (...args: any) => React.ReactNode,
+  currentUrl: string
+) {
   const rootRoute = createRootRoute({
     component: Outlet,
   });
 
   const componentRoute = createRoute({
     getParentRoute: () => rootRoute,
-    path: currentUrl.split("?")[0],
+    path: currentUrl.split('?')[0],
     component,
   });
 
@@ -41,7 +44,7 @@ export function renderWithRouter({
   component,
   Wrapper = React.Fragment,
   onNavigate = () => {},
-  currentUrl = "/"
+  currentUrl = '/',
 }: RenderWithRouterParams) {
   const router = createTestRouter(component, currentUrl);
   router.subscribe('onBeforeNavigate', onNavigate);
@@ -49,7 +52,7 @@ export function renderWithRouter({
     <Wrapper>
       {/* @ts-expect-error */}
       <RouterProvider router={router} />;
-    </Wrapper>,
+    </Wrapper>
   );
 
   return {

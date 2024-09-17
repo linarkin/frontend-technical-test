@@ -1,11 +1,11 @@
-import { useDropzone } from "react-dropzone";
-import { MemePicture, MemePictureProps } from "./meme-picture";
-import { AspectRatio, Box, Button, Flex, Icon, Text } from "@chakra-ui/react";
-import { Image, Pencil } from "@phosphor-icons/react";
+import { useDropzone } from 'react-dropzone';
+import { MemePicture } from './meme-picture';
+import { AspectRatio, Box, Button, Flex, Icon, Text } from '@chakra-ui/react';
+import { Image, Pencil } from '@phosphor-icons/react';
 
 export type MemeEditorProps = {
   onDrop: (file: File) => void;
-  memePicture?: MemePictureProps;
+  memePicture?: MemePictureType;
 };
 
 function renderNoPicture() {
@@ -18,7 +18,12 @@ function renderNoPicture() {
       justifyContent="center"
     >
       <Icon as={Image} color="black" boxSize={16} />
-      <Text>Select a picture</Text>
+      <Text>
+        Select a picture
+        <Text as="span" color="tomato">
+          *
+        </Text>
+      </Text>
       <Text color="gray.400" fontSize="sm">
         or drop it in this area
       </Text>
@@ -26,16 +31,21 @@ function renderNoPicture() {
   );
 }
 
-function renderMemePicture(memePicture: MemePictureProps, open: () => void) {
+function renderMemePicture(memePicture: MemePictureType, open: () => void) {
   return (
-    <Box width="full" height="full" position="relative" __css={{
-      "&:hover .change-picture-button": {
-        display: "inline-block",
-      },
-      "& .change-picture-button": {
-        display: "none",
-      },
-    }}>
+    <Box
+      width="full"
+      height="full"
+      position="relative"
+      __css={{
+        '&:hover .change-picture-button': {
+          display: 'inline-block',
+        },
+        '& .change-picture-button': {
+          display: 'none',
+        },
+      }}
+    >
       <MemePicture {...memePicture} />
       <Button
         className="change-picture-button"
@@ -66,7 +76,7 @@ export const MemeEditor: React.FC<MemeEditorProps> = ({
       onDrop(files[0]);
     },
     noClick: memePicture !== undefined,
-    accept: { "image/png": [".png"], "image/jpg": [".jpg"] },
+    accept: { 'image/png': ['.png'], 'image/jpg': ['.jpg'] },
   });
 
   return (
@@ -75,7 +85,7 @@ export const MemeEditor: React.FC<MemeEditorProps> = ({
         {...getRootProps()}
         width="full"
         position="relative"
-        border={!memePicture ? "1px dashed" : undefined}
+        border={!memePicture ? '1px dashed' : undefined}
         borderColor="gray.300"
         borderRadius={9}
         px={1}
